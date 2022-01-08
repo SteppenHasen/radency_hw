@@ -34,11 +34,10 @@ function abortNoteById(noteId) {
 }
 
 function editNote(note, noteID) {
-    abortNoteById(noteID)
-
     notes.set(
         noteID, Object.assign(note)
     );
+    return note
 }
 
 function getNoteWithId(noteId) {
@@ -46,7 +45,8 @@ function getNoteWithId(noteId) {
 }
 
 function getNotesStates() {
-    
+    let number_of_notes = Array.from(notes.values()).length
+    return {number_of_notes: number_of_notes}
 }
 
 export {

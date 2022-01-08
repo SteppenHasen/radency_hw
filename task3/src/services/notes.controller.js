@@ -9,15 +9,15 @@ import {
     } from "../repositories/notes.model.js";
 
 function httpgetAllNotes(req, res) {
-    return res.status(200).json(getAllNotes);
+    res.json(getAllNotes());
 };
 
-function httpAddNewNote() {
+function httpAddNewNote(req, res) {
     const note = req.body;
     
-    if (!note.text || !note.noteDate) {
+    if (!note.name || !note.noteDate || !note.content || !note.category) {
             return res.status(400).json({
-                error: 'Missing required launch property'
+                error: 'Missing required note property'
             })
         }
 
@@ -42,7 +42,7 @@ function deleteNote(req, res) {
     }
 
     const deleted = abortNoteById(noteID)
-    return res.status(200).json(deleted)
+    res.status(200).json(deleted)
 }
 
 function httpEditNote(req, res) {
@@ -72,7 +72,7 @@ function retrieveNote(req, res) {
 }
 
 function httpGetNotesStates(req, res) {
-    return res.status(200).json(getNotesStates());
+    res.status(200).json(getNotesStates());
 }
 
 export { 
