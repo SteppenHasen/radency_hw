@@ -35,13 +35,7 @@ function httpAddNewNote(req, res) {
             error: 'Missing required note category property'
         })
     }
-    /*
-    {
-        category: ["is missing"],
-        content: ["must be less then 100 chars", "must be without FUCK"],
-        name: ["must be string"]
-    }
-    */
+
     note.noteDate = new Date(note.noteDate);
     if (isNaN(note.noteDate)) {
         return res.status(400).json({
@@ -88,7 +82,7 @@ function retrieveNote(req, res) {
             error: 'note not found'
         })
     }
-    console.log(noteID)
+
     return res.status(200).json(getNoteWithId(noteID));    
 }
 
