@@ -1,4 +1,4 @@
-const notes = new Map();
+let notes = new Map();
 
 let latestID = 100;
 
@@ -22,9 +22,10 @@ function existNoteWithID(noteID) {
 
 function addNewNote(note) {
     latestID++;
-    notes.set(
-        latestID, Object.assign(note)
-    );
+    let newNote = {id: latestID, ...note}
+    notes.set(latestID, newNote);
+
+    return newNote
 };
 
 function abortNoteById(noteId) {
@@ -33,10 +34,9 @@ function abortNoteById(noteId) {
     return deleted
 }
 
-function editNote(note, noteID) {
-    notes.set(
-        noteID, Object.assign(note)
-    );
+function editNote(id, noteParams) {
+    let note = { ...notes.get(id), ...noteParams }
+    notes.set(id, note);
     return note
 }
 

@@ -14,13 +14,34 @@ function httpgetAllNotes(req, res) {
 
 function httpAddNewNote(req, res) {
     const note = req.body;
-    
-    if (!note.name || !note.noteDate || !note.content || !note.category) {
-            return res.status(400).json({
-                error: 'Missing required note property'
-            })
-        }
 
+    if (!note.name) {
+        return res.status(400).json({
+            error: 'Missing required note name property'
+        })
+    }
+    if (!note.noteDate) {
+        return res.status(400).json({
+            error: 'Missing required note noteDate property'
+        })
+    }
+    if (!note.content) {
+        return res.status(400).json({
+            error: 'Missing required note content property'
+        })
+    }
+    if (!note.category) {
+        return res.status(400).json({
+            error: 'Missing required note category property'
+        })
+    }
+    /*
+    {
+        category: ["is missing"],
+        content: ["must be less then 100 chars", "must be without FUCK"],
+        name: ["must be string"]
+    }
+    */
     note.noteDate = new Date(note.noteDate);
     if (isNaN(note.noteDate)) {
         return res.status(400).json({
@@ -28,8 +49,8 @@ function httpAddNewNote(req, res) {
         })
     }
 
-    addNewNote(note);
-    res.status(201).json(note);
+    let newNote = addNewNote(note);
+    res.status(201).json(newNote);
 };
 
 function deleteNote(req, res) {
@@ -46,16 +67,16 @@ function deleteNote(req, res) {
 }
 
 function httpEditNote(req, res) {
-    const noteID = Number(req.params.id)
+    const id = Number(req.params.id)
 
-    if (!existNoteWithID(noteID)) {
+    if (!existNoteWithID(id)) {
         return res.status(404).json({
             error: 'note not found'
         })
     }
 
-    const note = req.body;
-    editNote(note, noteID);
+    const noteParams = req.body;
+    let note = editNote(id, noteParams);
     res.status(201).json(note);
 }
 
@@ -67,7 +88,7 @@ function retrieveNote(req, res) {
             error: 'note not found'
         })
     }
-
+    console.log(noteID)
     return res.status(200).json(getNoteWithId(noteID));    
 }
 

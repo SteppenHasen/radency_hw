@@ -17,6 +17,7 @@ app.use(morgan('combined'));
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
+
 app.use('/', notesRouter)
 app.get('/*', (req, res) => {
     res.sendFile(join(path.resolve(), 'index.html'))
