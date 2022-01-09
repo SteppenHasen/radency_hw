@@ -1,4 +1,4 @@
-import {createNoteDOM} from './render.js'
+import render from './render.js'
 
 let notes = [
     {
@@ -53,6 +53,57 @@ let notes = [
     }    
 ]
 
-window.onload = function() {
-    notes.forEach(note => createNoteDOM(note.id, note))
+function reRender(notes) {
+    let notes_area = document.getElementById('notes_area')
+    let stats_area = document.getElementById('stats_area')
+
+    notes_area.innerHTML = '';
+    stats_area.innerHTML = '';
+
+    render(notes)    
 }
+
+function saveEditedData(noteID) {
+    let input = document.getElementById(`input${noteID}`)
+    let content = input.value
+    let foundIndex = notes.findIndex(note => note.id == noteID)
+    notes[foundIndex].content = content
+
+    reRender(notes)
+}
+
+function editNote(noteID) {
+    let content = document.getElementById(`contentID${noteID}`)
+    let foundIndex = notes.findIndex(note => note.id == noteID)
+
+    content.innerHTML = ''
+    let input = document.createElement('input')
+    input.id = `input${noteID}`
+    input.className = 'input'
+    input.value = notes[foundIndex].content
+    let button = document.createElement('button')
+    button.className = 'saveButton'
+    button.innerText = 'Save'
+    button.setAttribute('onclick', `saveEditedData(${noteID})`)
+
+    content.appendChild(input)
+    content.appendChild(button)
+}
+
+function archiveNote(noteID) {
+    let foundIndex = notes.findIndex(note => note.id == noteID)
+    notes[foundIndex].archived = true
+
+    reRender(notes)
+}
+
+function deleteNote(noteID) {
+    notes = notes.filter(note => { return note.id != noteID })
+
+    reRender(notes)
+}
+
+window.onload = function() {
+    render(notes)
+}
+
