@@ -2,4 +2,68 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Nunito', sans-serif;
+    background-color: #f6d2ac;
+    color: aliceblue;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
+
+
+table {
+    background-color: #e6ae74;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    width: 80vw;
+    text-align: center;
+}
+
+th {
+    background-color: #42281c;
+    border-radius: 5px;
+}
+td {
+    background-color: #a35233;
+    border-radius: 5px;
+    text-overflow:ellipsis;
+    padding: 5px;
+}
+
+.icon {
+    width: 100px;
+    background-size:30px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+table button {
+    width: 30px;
+    height: 30px;
+    background-color: #d6834f;
+    border: none;
+    border-radius: 3px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 5px;
+    background-position: center;
+}
+
+#add_note, #adding_area button {
+    width: 100px;
+    height: 30px;
+    background-color: #d6834f;
+    border: none;
+    border-radius: 3px;
+    color: cornsilk;
+}
+input, select, .input {
+    height: 30px;
+    background-color: #d6834f;
+    border: none;
+    border-radius: 3px;
+    color: cornsilk;
+
+} 
