@@ -92,6 +92,8 @@ function render(notes) {
     let notes_area = document.getElementById('notes_area')
     let stats_area = document.getElementById('stats_area')
 
+    document.getElementById('adding_area').style.display = 'none'
+
     notes.forEach(note => createNoteDOM(note.id, note, notes_area))
 
     createStatDOM(categories, notes, stats_area)

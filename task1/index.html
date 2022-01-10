@@ -29,7 +29,20 @@
                 </thead>
                 <tbody id="notes_area"></tbody>
             </table>
-            <button type="button" id="add_note">Add Note</button>
+        </div>
+
+        <button type="button" id="add_note" onclick="showAddingField()">Add Note</button>
+        <div id="adding_area">
+            <input id="adding_name" type="text" placeholder="Write name of note">
+            <input id="adding_content" type="text" placeholder="Just write note">
+            <select id="adding_select">
+                <option value="news" elected="selected">news</option>
+                <option value="note">note</option>
+                <option value="religion">religion</option>
+                <option value="emotions">emotions</option>
+                <option value="animals">animals</option>
+            </select>
+            <button type="button" onclick="addNote()">Save</button>
         </div>
 
         <div class="stats_area" >

@@ -1,5 +1,7 @@
 import render from './render.js'
 
+let latestID = 14
+
 let notes = [
     {
         id: 10,
@@ -103,7 +105,42 @@ function deleteNote(noteID) {
     reRender(notes)
 }
 
+function showAddingField() {
+    document.getElementById('adding_area').style.display = 'block'
+    document.getElementById('add_note').style.display = 'none'
+}
+
+function addNote() {
+    let name = document.getElementById('adding_name').value
+    let content = document.getElementById('adding_content').value
+    let category = document.getElementById('adding_select').value
+    let date = new Date()
+    latestID++
+
+    let regex = new RegExp('[0-9]{2}/[0-9]{2}/[0-9]{4}')
+    let dates_arr = regex.exec(content)
+    let dates = ''
+    dates_arr == null ? dates : dates = dates_arr.reduce((a, b) => a + '' + b)
+
+    let note = {
+        id: latestID,
+        name : name,
+        date: date.toLocaleString(),
+        category: category,
+        content: content,
+        dates: dates,
+        archived: false,
+        active: true
+    }
+
+    notes.push(note)
+
+    document.getElementById('adding_area').style.display = 'none'
+    document.getElementById('add_note').style.display = 'block'
+
+    reRender(notes)
+}
+
 window.onload = function() {
     render(notes)
 }
-
