@@ -9,7 +9,6 @@ function App() {
     localStorage.notes ? JSON.parse(localStorage.notes) : []
   );
   const [activeNote, setActiveNote] = useState(false);
-  const archivedNotes = []
 
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notes));
@@ -22,7 +21,8 @@ function App() {
       body: "",
       category: "",
       lastModified: Date.now(),
-      dates: ""
+      dates: "",
+      archived: false
     };
 
     setNotes([newNote, ...notes]);
@@ -34,11 +34,15 @@ function App() {
   };
 
   const onArchiveNote = (noteId) => {
-    let noteToArchive = notes[notes.findIndex(note => note.id === noteId)]
-    archivedNotes.push(noteToArchive)
+    const updatedNotesArr = notes.map((note) => {
+      if (note.id === noteId) {
+        note.archived = true
+      }
 
-    localStorage.setItem("archived", JSON.stringify(archivedNotes));
-    setNotes(notes.filter(({ id }) => id !== noteId))
+      return note;
+    });
+
+    setNotes(updatedNotesArr);
   }
 
   const onUpdateNote = (updatedNote) => {
@@ -67,7 +71,6 @@ function App() {
         onDeleteNote={onDeleteNote}
         activeNote={activeNote}
         setActiveNote={setActiveNote}
-        archivedNotes={archivedNotes}
       />
     </div>
   );

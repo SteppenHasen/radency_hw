@@ -4,10 +4,9 @@ const Table = ({
     onDeleteNote,
     activeNote,
     setActiveNote,
-    onArchiveNote,
-    archivedNotes
+    onArchiveNote
   }) => {
-    const sortedNotes = notes
+    const sortedNotes = notes.filter(note => note.archived === false)
     const regex = new RegExp('[0-9]{2}/[0-9]{2}/[0-9]{4}')
     const categories = ["news", "note", "religion", "emotions", "animals"]
     
@@ -50,7 +49,7 @@ const Table = ({
               <div>
                 <p>{e}</p>
                 <span>Active:{sortedNotes.filter(note => note.category === e).length}</span>
-                <span>Archived:{archivedNotes.filter(note => note.category === e).length}</span>
+                <span>Archived:{notes.filter(note => note.category === e && note.archived === true).length}</span>
               </div>
             ))}
           </div> 
