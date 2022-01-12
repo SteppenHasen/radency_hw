@@ -29,7 +29,8 @@ const Main = ({ activeNote, onUpdateNote }) => {
         <select 
         id="category"
         onChange={(e) => onEditField("category", e.target.value)}>
-            <option value="news" elected="selected">news</option>
+            <option value="" selected="selected">Choose category</option>
+            <option value="news">news</option>
             <option value="note">note</option>
             <option value="religion">religion</option>
             <option value="emotions">emotions</option>
